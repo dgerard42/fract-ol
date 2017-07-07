@@ -32,6 +32,7 @@ int				main(void)
 	env.mlx = mlx_init();
 	env.reinit = false;
 	welcome_user();
+	
 	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
 	mlx_loop(env.mlx);
 }

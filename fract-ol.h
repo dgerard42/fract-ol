@@ -13,7 +13,15 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define KEY_ESC			53
+# include "libs/minilibx/mlx.h"
+# include "libs/libft/libft.h"
+# include <math.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdbool.h>
+
+# define PHI				1.618033987498948482
+# define KEY_ES				53
 # define KEY_W				13
 # define KEY_A				0
 # define KEY_S				1
@@ -25,12 +33,37 @@
 # define KEY_M				46
 # define KEY_F				3
 
-
 typedef	struct	s_env
 {
 	void	*mlx;
 	void	*window;
 	bool	reinit;
 }				t_env;
+
+typedef	struct	s_phi
+{
+	float		*pent;
+	float		s1;
+	float		s2;
+	float		c1;
+	float		c2;
+}				t_phi;
+
+typedef	struct	s_drw
+{
+	int			x0;
+	int			y0;
+//	int			z0;
+	int			x1;
+	int			y1;
+//	int			z1;
+	int			rise;
+	int			run;
+	int			slope;
+	int			adjust;
+	int			level;
+//	int			clr;
+//	int			clr_adj;
+}				t_drw;
 
 #endif

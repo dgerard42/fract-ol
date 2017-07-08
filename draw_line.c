@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fract-ol.h"
 
 void				no_run(t_env *env, t_drw *drw)
 {
 	if (drw->y1 < drw->y0)
 		ft_bitswap((unsigned char *)&(drw->y0), (unsigned char *)&(drw->y1), 4);
 	while (drw->y0 < drw->y1)
-		mlx_pixel_put(env->mlx, env->window, drw->x0, drw->y0++, drw->clr);
+		mlx_pixel_put(env->mlx, env->window, drw->x0, drw->y0++, 0x00FF00);
 }
 
 void				engine(t_env *env, t_drw *drw, int riru, int *drop)
@@ -36,10 +36,9 @@ void				engine(t_env *env, t_drw *drw, int riru, int *drop)
 	while (a0 != a1)
 	{
 		if (riru == 0)
-			mlx_pixel_put(env->mlx, env->window, a0++, b0, drw->clr);
+			mlx_pixel_put(env->mlx, env->window, a0++, b0, drw->color);
 		if (riru == 1)
-			mlx_pixel_put(env->mlx, env->window, b0, a0++, drw->clr);
-	//	drw->clr = (drw->clr != 0xFF0000) ? drw->clr += drw->clr_adj : drw->clr;
+			mlx_pixel_put(env->mlx, env->window, b0, a0++, drw->color);
 		bucket += drop[riru];
 		if (bucket >= drw->level)
 		{
@@ -60,8 +59,6 @@ void				setup(t_drw *drw)
 	drw->rise = (drw->y1) - (drw->y0);
 	drw->run = (drw->x1) - (drw->x0);
 	drw->adjust = (drw->rise * drw->run >= 0) ? 1 : -1;
-//	drw->clr = (drw->z0 == 0 && drw->z1 == 0) ? 0xFF0000 : 0xFF00FF;
-//	drw->clr_adj = (drw->z0 == drw->z1) ? 0 : -1;
 }
 
 void				draw_line(t_env *env, t_drw *drw)
@@ -71,6 +68,7 @@ void				draw_line(t_env *env, t_drw *drw)
 	setup(drw);
 	drop[0] = abs(drw->rise * 2);
 	drop[1] = abs(drw->run * 2);
+//	printf("in draw x0=%d, y0=%d, x1=%d, y1=%d\n", drw->x0, drw->y0, drw->x1, drw->y1);
 	if (drw->run == 0)
 		no_run(env, drw);
 	else

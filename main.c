@@ -22,7 +22,7 @@ void			welcome_user(void)
 	ft_putstr("---------------------------\nM == open Madelbrot fractal\n");
 	ft_putstr("W == move up\nA == move left\n");
 	ft_putstr("S == move right\nD == move down\nZ == zoom in\nX == zoom out\n");
-	ft_putstr("---------------------------\nF == open Barnsley Fern fractal\n");
+	ft_putstr("---------------------------\nF == open Φ Pentagram fractal\n");
 }
 
 int				main(void)
@@ -32,7 +32,8 @@ int				main(void)
 	env.mlx = mlx_init();
 	env.reinit = false;
 	welcome_user();
-	
-	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
+	env.window = mlx_new_window(env.mlx, WIN_LEN, WIN_HI, "hail satan");
+	phi(&env);
+//	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
 	mlx_loop(env.mlx);
 }

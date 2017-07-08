@@ -14,7 +14,6 @@
 
 int				key_controls(int keycode, t_env *env)
 {
-	if (keycode == KEY_ESC)
-		exit_fractol(env);
-	if (keycode == 
+//	if (keycode == KEY_ESC)
+//		exit_fractol(env);
 }

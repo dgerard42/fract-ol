@@ -20,6 +20,9 @@
 # include <stdio.h>
 # include <stdbool.h>
 
+# define WIN_HI				800
+# define WIN_LEN			800
+
 # define PHI				1.618033987498948482
 # define KEY_ES				53
 # define KEY_W				13
@@ -38,6 +41,7 @@ typedef	struct	s_env
 	void	*mlx;
 	void	*window;
 	bool	reinit;
+	int		scale;
 }				t_env;
 
 typedef	struct	s_phi
@@ -53,17 +57,18 @@ typedef	struct	s_drw
 {
 	int			x0;
 	int			y0;
-//	int			z0;
 	int			x1;
 	int			y1;
-//	int			z1;
 	int			rise;
 	int			run;
 	int			slope;
 	int			adjust;
 	int			level;
-//	int			clr;
-//	int			clr_adj;
+	int			color;
 }				t_drw;
+
+void			phi(t_env *env);
+int				key_controls(int keycode, t_env *env);
+void			draw_line(t_env *env, t_drw *drw);
 
 #endif

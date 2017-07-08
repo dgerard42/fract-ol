@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
+NAME = fract-ol
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -19,10 +19,7 @@ LIBS = libs/libft/libft.a\
 
 SRCS = main.c\
 	   draw_line.c\
-	   key_controls.c\
-	   draw_web.c\
-	   projection.c\
-	   read_file.c
+	   phi.c\
 
 FRAMEWORKS = -framework OpenGL -framework AppKit
 
@@ -34,8 +31,8 @@ $(NAME): $(OFILES)
 	@make -C libs/libft/
 	@make -C libs/minilibx/
 	@gcc $(CFLAGS) -o $@ $(OFILES) $(LIBS) $(FRAMEWORKS)
-	@echo "\033[32m[fdf created ( ͡° ͜ʖ ͡°)]\033[0m"
-	
+	@echo "\033[32m[fract-ol created ( ͡° ͜ʖ ͡°)]\033[0m"
+
 %.o: %.c
 	@gcc $(CFLAGS) -c $^ -o $@
 	@/bin/echo -n "❂❂❂❂❂"

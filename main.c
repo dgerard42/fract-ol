@@ -14,7 +14,7 @@
 
 void			welcome_user(void)
 {
-	ft_putstr("welcome user ( ͡° ͜ʖ ͡°)\n");
+	ft_putstr("welcome user (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n");
 	ft_putstr("--------------command list-----------------\n");
 	ft_putstr("ESC == exit program\nC == shift color palette\n");
 	ft_putstr("---------------------------\nJ == open Julia set\n");
@@ -25,15 +25,23 @@ void			welcome_user(void)
 	ft_putstr("---------------------------\nF == open Φ Pentagram fractal\n");
 }
 
+void			reinit(t_env *env)
+{
+	mlx_clear_window(env->mlx, env->window);
+	ft_memdel((void **)&phi->pent);
+	phi(env);
+}
+
 int				main(void)
 {
 	t_env env;
+	t_env phi;
 
 	env.mlx = mlx_init();
 	env.reinit = false;
 	welcome_user();
 	env.window = mlx_new_window(env.mlx, WIN_LEN, WIN_HI, "hail satan");
 	phi(&env);
-//	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
+	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
 	mlx_loop(env.mlx);
 }

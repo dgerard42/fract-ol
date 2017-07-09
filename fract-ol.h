@@ -23,7 +23,7 @@
 # define WIN_HI				800
 # define WIN_LEN			800
 
-# define PHI				1.618033987498948482
+# define PHI				1.618033987
 # define KEY_ES				53
 # define KEY_W				13
 # define KEY_A				0
@@ -51,6 +51,8 @@ typedef	struct	s_phi
 	float		s2;
 	float		c1;
 	float		c2;
+	bool		inverse;
+	int			displace;
 }				t_phi;
 
 typedef	struct	s_drw

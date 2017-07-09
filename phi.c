@@ -6,7 +6,7 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 18:18:20 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/06 18:18:27 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/08 18:56:24 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void			phi_setup(t_env *env, t_phi *phi)
 {
 	phi->pent = ft_floatarraynew(12);
-	env->scale = 42;
-	phi->pent[0] = 0 * env->scale;
+	phi->inverse = false;
+	phi->displace = 1;
+	env->scale = 8;
+	phi->pent[0] = 0;
 	phi->pent[1] = 1 * env->scale;
 	phi->s1 = sin((2 * M_PI) / 5);
 	phi->s2 = sin((4 * M_PI) / 5);
@@ -26,17 +28,17 @@ void			phi_setup(t_env *env, t_phi *phi)
 
 void			new_pent(t_env *env, t_phi *phi)
 {
-	phi->pent[2] = phi->s1 * fabsf(phi->pent[1]);
-	phi->pent[3] = phi->c1 * fabsf(phi->pent[1]);
-	//here, when you multiply by fabsf(phi->pent[1]) you will need to start drawing p1 flipped
-	//into the negative every other time
-	//the radius of the unit circle that you are drawing the pentagon within.
-	phi->pent[4] = phi->s2 * fabsf(phi->pent[1]);
-	phi->pent[5] = -(phi->c2) * fabsf(phi->pent[1]);
-	phi->pent[6] = -(phi->s2) * fabsf(phi->pent[1]);
-	phi->pent[7] = -(phi->c2) * fabsf(phi->pent[1]);
-	phi->pent[8] = -(phi->s1) * fabsf(phi->pent[1]);
-	phi->pent[9] = phi->c1 * fabsf(phi->pent[1]);
+	int rad;
+
+	rad = fabsf(phi->pent[1]);
+	phi->pent[2] = (phi->inverse == false) ? phi->s1 * rad : -(phi->s1) * rad;
+	phi->pent[3] = (phi->inverse == false) ? phi->c1 * rad : -(phi->c1) * rad;
+	phi->pent[4] = (phi->inverse == false) ? phi->s2 * rad : -(phi->s2) * rad;
+	phi->pent[5] = (phi->inverse == false) ? -(phi->c2) * rad : phi->c2 * rad;
+	phi->pent[6] = (phi->inverse == false) ? -(phi->s2) * rad : phi->s2 * rad;
+	phi->pent[7] = (phi->inverse == false) ? -(phi->c2) * rad : phi->c2 * rad;
+	phi->pent[8] = (phi->inverse == false) ? -(phi->s1) * rad : phi->s1 * rad;
+	phi->pent[9] = (phi->inverse == false) ? phi->c1 * rad : -(phi->c1) * rad;
 	phi->pent[10] = phi->pent[0];
 	phi->pent[11] = phi->pent[1];
 }
@@ -47,7 +49,6 @@ void			draw_pent(t_env *env, t_phi *phi, t_drw *drw)
 	int		j;
 
 	i = 0;
-	drw->color = 0x00FF00;
 	while (i < 10)
 	{
 		drw->x0 = (int)phi->pent[i] + (WIN_LEN / 2);
@@ -78,10 +79,33 @@ void			draw_pent(t_env *env, t_phi *phi, t_drw *drw)
 
 void			phi(t_env *env)
 {
-	t_phi	phi;
 	t_drw	drw;
+	float	delta_x;
+	float	increase;
+	int		i;
 
+	i = 1;
 	phi_setup(env, &phi);
-	new_pent(env, &phi);
-	draw_pent(env, &phi, &drw);
+	drw.color = 0x00FF00;
+	while (phi.pent[1] < (WIN_HI + 200))
+	{
+		new_pent(env, &phi);
+		draw_pent(env, &phi, &drw);
+		i++;
+		delta_x = fabsf(phi.pent[6] - phi.pent[4]);
+//		printf("delta_x=%f\n", delta_x);
+		increase = sqrt(pow(PHI * delta_x, 2) - pow((delta_x / 2), 2));
+//		printf("increase=%f\n", increase);
+		phi.pent[1] = fabsf(phi.pent[5]) + increase + phi->displace;
+		drw.color = 0x00FF00;
+		phi.inverse = false;
+		if (i % 2 == 0)
+		{
+			phi.pent[1] = -phi.pent[1];
+			drw.color = 0x0000FF;
+			phi.inverse = true;
+		}
+//		printf("phi.pent[1]=%f\n", phi.pent[1]);
+		return(&phi);
+	}
 }

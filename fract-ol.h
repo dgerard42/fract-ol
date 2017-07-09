@@ -20,10 +20,10 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-# define WIN_HI				800
-# define WIN_LEN			800
-
+# define WIN_HI				300
+# define WIN_LEN			300
 # define PHI				1.618033987
+
 # define KEY_ES				53
 # define KEY_W				13
 # define KEY_A				0
@@ -41,8 +41,20 @@ typedef	struct	s_env
 	void	*mlx;
 	void	*window;
 	bool	reinit;
+	int		fractal;
 	int		scale;
 }				t_env;
+
+typedef	struct	s_jul
+{
+	double	cR;
+	double	cI;
+	double	zRnew;
+	double	zInew;
+	double	zRold;
+	double	zIold;
+	int		color;
+}				t_jul;
 
 typedef	struct	s_phi
 {
@@ -69,6 +81,8 @@ typedef	struct	s_drw
 	int			color;
 }				t_drw;
 
+void			julia(t_env *env);
+void			mandel(t_env *env);
 void			phi(t_env *env);
 int				key_controls(int keycode, t_env *env);
 void			draw_line(t_env *env, t_drw *drw);

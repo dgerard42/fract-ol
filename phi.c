@@ -12,21 +12,25 @@
 
 #include "fract-ol.h"
 
-void			phi_setup(t_env *env, t_phi *phi)
+void				phi_setup(t_env *env, t_phi *phi)
 {
-	phi->pent = ft_floatarraynew(12);
-	phi->inverse = false;
-	phi->displace = 1;
-	env->scale = 8;
+	if (env->reinit == false)
+	{
+		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "Φ");
+		phi->pent = ft_floatarraynew(12);
+		phi->inverse = false;
+//		phi->displace = 1;
+		env->scale = 8;
+		phi->s1 = sin((2 * M_PI) / 5);
+		phi->s2 = sin((4 * M_PI) / 5);
+		phi->c1 = cos((2 * M_PI) / 5);
+		phi->c2 = cos(M_PI / 5);
+	}
 	phi->pent[0] = 0;
 	phi->pent[1] = 1 * env->scale;
-	phi->s1 = sin((2 * M_PI) / 5);
-	phi->s2 = sin((4 * M_PI) / 5);
-	phi->c1 = cos((2 * M_PI) / 5);
-	phi->c2 = cos(M_PI / 5);
 }
 
-void			new_pent(t_env *env, t_phi *phi)
+void				new_pent(t_env *env, t_phi *phi)
 {
 	int rad;
 
@@ -43,7 +47,7 @@ void			new_pent(t_env *env, t_phi *phi)
 	phi->pent[11] = phi->pent[1];
 }
 
-void			draw_pent(t_env *env, t_phi *phi, t_drw *drw)
+void				draw_pent(t_env *env, t_phi *phi, t_drw *drw)
 {
 	int		i;
 	int		j;
@@ -77,8 +81,9 @@ void			draw_pent(t_env *env, t_phi *phi, t_drw *drw)
 	}
 }
 
-void			phi(t_env *env)
+void				phi(t_env *env)
 {
+	t_phi	phi;
 	t_drw	drw;
 	float	delta_x;
 	float	increase;
@@ -96,7 +101,7 @@ void			phi(t_env *env)
 //		printf("delta_x=%f\n", delta_x);
 		increase = sqrt(pow(PHI * delta_x, 2) - pow((delta_x / 2), 2));
 //		printf("increase=%f\n", increase);
-		phi.pent[1] = fabsf(phi.pent[5]) + increase + phi->displace;
+		phi.pent[1] = fabsf(phi.pent[5]) + increase + phi.displace;
 		drw.color = 0x00FF00;
 		phi.inverse = false;
 		if (i % 2 == 0)
@@ -106,6 +111,5 @@ void			phi(t_env *env)
 			phi.inverse = true;
 		}
 //		printf("phi.pent[1]=%f\n", phi.pent[1]);
-		return(&phi);
 	}
 }

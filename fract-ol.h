@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-# define WIN_HI				300
-# define WIN_LEN			300
+# define WIN_HI				1200
+# define WIN_LEN			1200
 # define PHI				1.618033987
 
 # define KEY_ES				53
@@ -45,7 +45,7 @@ typedef	struct	s_env
 	int		scale;
 }				t_env;
 
-typedef	struct	s_jul
+typedef	struct	s_frac
 {
 	double	cR;
 	double	cI;
@@ -54,7 +54,7 @@ typedef	struct	s_jul
 	double	zRold;
 	double	zIold;
 	int		color;
-}				t_jul;
+}				t_frac;
 
 typedef	struct	s_phi
 {

@@ -66,8 +66,8 @@ int				main(int argc, char **argv)
 	env.reinit = false;
 	if (env.fractal == 0)
 		julia(&env);
-//	if (env.fractal == 1)
-//		mandel(&env);
+	if (env.fractal == 1)
+		mandel(&env);
 //	if (env.fractal == 2)
 //		phi(&env);
 	welcome_user();

@@ -6,7 +6,7 @@
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 19:15:03 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/09 13:50:38 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/09 17:22:26 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = main.c\
 	   draw_line.c\
 	   phi.c\
 	   julia.c\
+	   mandel.c\
 
 FRAMEWORKS = -framework OpenGL -framework AppKit
 

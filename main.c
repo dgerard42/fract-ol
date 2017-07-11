@@ -28,8 +28,13 @@ void			welcome_user(void)
 void			reinit(t_env *env)
 {
 	mlx_clear_window(env->mlx, env->window);
-//	ft_memdel((void **)&phi->pent);
-//	phi(env);
+	if (env->fractal == 0 || env->fractal == 1)
+		fractal_gen(env);
+	if (env->fractal == 2)
+	{
+		phi_gen(env);
+		ft_memdel((void **)&env->pent);
+	}
 }
 
 void			handle_parameters(t_env *env, int argc, char *parameter)
@@ -64,12 +69,10 @@ int				main(int argc, char **argv)
 	handle_parameters(&env, argc, argv[1]);
 	env.mlx = mlx_init();
 	env.reinit = false;
-	if (env.fractal == 0)
-		julia(&env);
-	if (env.fractal == 1)
-		mandel(&env);
-//	if (env.fractal == 2)
-//		phi(&env);
+	if (env.fractal == 0 || env.fractal == 1)
+		fractal_gen(&env);
+	if (env.fractal == 2)
+		phi_gen(&env);
 	welcome_user();
 //	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
 	mlx_loop(env.mlx);

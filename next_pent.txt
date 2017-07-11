@@ -6,7 +6,7 @@
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/08 13:19:54 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/08 14:39:15 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/10 19:33:28 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,3 +14,9 @@
 >>(delta_x / 2) = base
 >>squareroot((phi * delta_x)^2 - base^2)) = yeah
 >>-(abs(phi->pent[5]) + yeah) = y value of new pent start
+
+techincal things to figure out
+.multithreading
+.mouse controls
+.images
+.mlx_string_put

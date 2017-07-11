@@ -6,7 +6,7 @@
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 19:15:03 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/09 17:22:26 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/10 17:24:32 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,7 @@ LIBS = libs/libft/libft.a\
 SRCS = main.c\
 	   draw_line.c\
 	   phi.c\
-	   julia.c\
-	   mandel.c\
+	   fractal.c\
 
 FRAMEWORKS = -framework OpenGL -framework AppKit
 

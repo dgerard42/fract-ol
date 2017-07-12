@@ -32,8 +32,8 @@ void			reinit(t_env *env)
 		fractal_gen(env);
 	if (env->fractal == 2)
 	{
-		phi_gen(env);
 		ft_memdel((void **)&env->pent);
+		phi_gen(env);
 	}
 }
 
@@ -74,7 +74,8 @@ int				main(int argc, char **argv)
 	if (env.fractal == 2)
 		phi_gen(&env);
 	welcome_user();
-//	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
+	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
+//	mlx_mouse_hook(env.window, &mouse_controls, &env);
 	mlx_loop(env.mlx);
 	return(0);
 }

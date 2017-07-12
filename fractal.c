@@ -12,6 +12,12 @@
 
 #include "fract-ol.h"
 
+/*
+void				fractal_setup(t_env *env, t_frac *frac)
+{
+
+}
+*/
 void				fractal_draw(t_env *env, t_frac *frac)
 {
 	int i;
@@ -26,11 +32,11 @@ void				fractal_draw(t_env *env, t_frac *frac)
 		{
 			i = 0;
 			frac->color = 0xFF0000;
-			frac->zRnew = (env->fractal == 0) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 3 * env->scale) : 0;
-			frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / (WIN_HI / 3 * env->scale) : 0;
+			frac->zRnew = (env->fractal == 0) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 2 * env->scale) : 0;
+			frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / (WIN_HI / 2 * env->scale) : 0;
 			frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 3 * env->scale) : frac->cR;
 			frac->cI = (env->fractal == 1) ? (y - (WIN_HI / 2)) / (WIN_HI / 3 * env->scale) : frac->cI;
-			while (i < 300 && (frac->zRnew * frac->zRnew) + (frac->zInew * frac->zInew) < 4)
+			while (i < env->iterations && (frac->zRnew * frac->zRnew) + (frac->zInew * frac->zInew) < 4)
 			{
 				frac->zRold = frac->zRnew;
 				frac->zIold = frac->zInew;
@@ -50,14 +56,21 @@ void				fractal_gen(t_env *env)
 {
 	t_frac frac;
 
+	env->iterations = 300;
 	if (env->fractal == 0)
 	{
-		frac.cR = -0.624;
-		frac.cI = 0.435;
+		if (env->reinit == true)
+		{
+			frac.cR = 0;
+			frac.cI = 0;
+			env->scale = 1;
+		}
 		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ J U L I A ~");
 	}
 	if (env->fractal == 1)
+	{
+		env->scale = 1;
 		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ M A N D E L B R O T ~");
-	env->scale = 4;
+	}
 	fractal_draw(env, &frac);
 }

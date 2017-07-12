@@ -6,7 +6,7 @@
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 19:15:03 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/10 17:24:32 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/11 19:08:50 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = main.c\
 	   draw_line.c\
 	   phi.c\
 	   fractal.c\
+	   key_controls.c\
 
 FRAMEWORKS = -framework OpenGL -framework AppKit
 

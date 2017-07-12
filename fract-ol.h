@@ -20,21 +20,20 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-# define WIN_HI				600
-# define WIN_LEN			600
-# define PHI				1.6180339874989
+# define WIN_HI				1200
+# define WIN_LEN			1200
+# define PHI				1.618033987
 
-# define KEY_ES				53
+# define KEY_ESC			53
 # define KEY_W				13
 # define KEY_A				0
 # define KEY_S				1
 # define KEY_D				2
-# define KEY_X				7
-# define KEY_Z				6
+# define KEY_K              40
+# define KEY_I              34
+# define KEY_G              5
 # define KEY_C				8
-# define KEY_J				38
-# define KEY_M				46
-# define KEY_F				3
+# define KEY_V				9
 
 #define TEXT				"my milkshake brings all the boys to the yard"
 
@@ -45,7 +44,10 @@ typedef	struct	s_env
 	bool	reinit;
 	int		fractal;
 	int		scale;
+	int		color_inc;
+	int		iterations;
 	float	*pent;
+	float	pent_interval;
 }				t_env;
 
 typedef	struct	s_frac
@@ -66,7 +68,6 @@ typedef	struct	s_phi
 	float		c1;
 	float		c2;
 	bool		inverse;
-	int			displace;
 }				t_phi;
 
 typedef	struct	s_drw
@@ -85,7 +86,9 @@ typedef	struct	s_drw
 
 void			fractal_gen(t_env *env);
 void			phi_gen(t_env *env);
-//int				key_controls(int keycode, t_env *env);
+int				key_controls(int keycode, t_env *env);
+//int				mouse_controls(int keycode, t_env *env);
 void			draw_line(t_env *env, t_drw *drw);
+void			reinit(t_env *env);
 
 #endif

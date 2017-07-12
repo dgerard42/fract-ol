@@ -12,22 +12,26 @@
 
 #include "fract-ol.h"
 
-void				phi_setup(t_env *env, t_phi *phi)
+void				phi_setup(t_env *env, t_phi *phi, t_drw *drw)
 {
 	if (env->reinit == false)
 	{
 		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ H A I L  S A T I N ~");
-		env->pent = ft_floatarraynew(12);
+		env->pent_interval = 0.220000;
+		env->color_inc = 2000;
+	}
+	//
 		env->scale = 8;
-		phi->inverse = false;
-		phi->displace = 0;
 		phi->s1 = sin((2 * M_PI) / 5);
 		phi->s2 = sin((4 * M_PI) / 5);
 		phi->c1 = cos((2 * M_PI) / 5);
 		phi->c2 = cos(M_PI / 5);
-	}
+	//
+	phi->inverse = false;
+	env->pent = ft_floatarraynew(12);
 	env->pent[0] = 0;
 	env->pent[1] = 1 * env->scale;
+	drw->color = (env->color_inc == 0) ? 0x00FF00 : 0xFF0000;
 }
 
 void				new_pent(t_env *env, t_phi *phi)
@@ -90,19 +94,20 @@ void				phi_gen(t_env *env)
 	int		i;
 
 	i = 1;
-	phi_setup(env, &phi);
-	drw.color = 0xFF0000;
+	phi_setup(env, &phi, &drw);
 	while (env->pent[1] < (WIN_HI + 200))
 	{
 		new_pent(env, &phi);
 		draw_pent(env, &phi, &drw);
 		i++;
-		drw.color += 10000;
+		drw.color += env->color_inc;
 		delta_x = fabsf(env->pent[6] - env->pent[4]);
-//		printf("delta_x=%f\n", delta_x);
-		increase = sqrt(pow((PHI + phi.displace) * delta_x, 2) - pow((delta_x / 2), 2));
+	//	printf("delta_x=%f\n", delta_x);
+		increase = sqrt(pow((PHI + env->pent_interval) * delta_x, 2) - pow((delta_x + env->pent_interval/ 2), 2));
+//		printf("env->pent_interval%f\n", env->pent_interval);
 //		printf("increase=%f\n", increase);
-		env->pent[1] = fabsf(env->pent[5]) + increase; //+ phi.displace;
+//		printf("pent[1]%f\n", env->pent[1]);
+		env->pent[1] = fabsf(env->pent[5]) + increase;
 //		drw.color = 0x00FF00;
 		phi.inverse = false;
 		if (i % 2 == 0)
@@ -111,7 +116,7 @@ void				phi_gen(t_env *env)
 //			drw.color = 0x0000FF;
 			phi.inverse = true;
 		}
-		mlx_string_put(env->mlx, env->window, 20, WIN_HI - 20, 0xFFFFFF0, ft_itoa((PHI + phi.displace) * 100000000));
+//		mlx_string_put(env->mlx, env->window, 20, WIN_HI - 20, 0xFFFFFF0, ft_itoa((PHI + env->pent_interval) * 100000000));
 //		printf("env->pent[1]=%f\n", env->pent[1]);
 	}
 }

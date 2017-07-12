@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    next_pent.txt                                      :+:      :+:    :+:    #
+#    notes.txt                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/08 13:19:54 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/10 19:33:28 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/11 20:58:40 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,3 +20,38 @@ techincal things to figure out
 .mouse controls
 .images
 .mlx_string_put
+
+key controls
+............PHI............
+R == rotation on / off
+I == increase distance for which pattern is continued
+K == decrease distance for which pattern is continued
+G == All lines green
+
+...........MANDEL..........
+I == increase iterations
+K == decrease iterations
+W == up
+A == left
+S == down
+D == right
+MOUSE WHEEL == zoom
+
+..........JULIA............
+I == increase iterations
+K == decrease iterations
+Use the mouse to vary the C constant
+F == fix the current c value / restore movement
+MOUSE WHEEL == zoom
+
+...........ALL.............
+ESC == exit program
+C == + color increase per iteration
+V == - color increase per iteration
+
+optimizations
+.if the point isn't in the screen dont calculate it (for frac zoom)
+
+phi
+nice color incs for fractal
+34398479

@@ -17,20 +17,17 @@ void				phi_setup(t_env *env, t_phi *phi, t_drw *drw)
 	if (env->reinit == false)
 	{
 		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ H A I L  S A T I N ~");
-		env->pent_interval = 0.220000;
-		env->color_inc = 2000;
+		env->pent_interval = 0.22;
+		env->color_inc = 200;
 	}
-	//
-		env->scale = 8;
-		phi->s1 = sin((2 * M_PI) / 5);
-		phi->s2 = sin((4 * M_PI) / 5);
-		phi->c1 = cos((2 * M_PI) / 5);
-		phi->c2 = cos(M_PI / 5);
-	//
+	phi->s1 = sin((2 * M_PI) / 5);
+	phi->s2 = sin((4 * M_PI) / 5);
+	phi->c1 = cos((2 * M_PI) / 5);
+	phi->c2 = cos(M_PI / 5);
 	phi->inverse = false;
 	env->pent = ft_floatarraynew(12);
 	env->pent[0] = 0;
-	env->pent[1] = 1 * env->scale;
+	env->pent[1] = 1 * 8;
 	drw->color = (env->color_inc == 0) ? 0x00FF00 : 0xFF0000;
 }
 
@@ -104,9 +101,10 @@ void				phi_gen(t_env *env)
 		delta_x = fabsf(env->pent[6] - env->pent[4]);
 	//	printf("delta_x=%f\n", delta_x);
 		increase = sqrt(pow((PHI + env->pent_interval) * delta_x, 2) - pow((delta_x + env->pent_interval/ 2), 2));
-//		printf("env->pent_interval%f\n", env->pent_interval);
-//		printf("increase=%f\n", increase);
-//		printf("pent[1]%f\n", env->pent[1]);
+	//	printf("env->pent_interval%f\n", env->pent_interval);
+	//	printf("increase=%f\n", increase);
+	//	printf("pent[1]%f\n", env->pent[1]);
+	//	printf("pent[5]%f\n", env->pent[5]);
 		env->pent[1] = fabsf(env->pent[5]) + increase;
 //		drw.color = 0x00FF00;
 		phi.inverse = false;

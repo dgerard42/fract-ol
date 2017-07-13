@@ -35,16 +35,16 @@
 # define KEY_C				8
 # define KEY_V				9
 
-#define TEXT				"my milkshake brings all the boys to the yard"
-
 typedef	struct	s_env
 {
 	void	*mlx;
 	void	*window;
 	bool	reinit;
 	int		fractal;
-	int		scale;
+	double	scale;
 	int		color_inc;
+	double	x_displace;
+	double	y_displace;
 	int		iterations;
 	float	*pent;
 	float	pent_interval;

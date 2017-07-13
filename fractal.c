@@ -32,20 +32,20 @@ void				fractal_draw(t_env *env, t_frac *frac)
 		{
 			i = 0;
 			frac->color = 0xFF0000;
-			frac->zRnew = (env->fractal == 0) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 2 * env->scale) : 0;
-			frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / (WIN_HI / 2 * env->scale) : 0;
-			frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 3 * env->scale) : frac->cR;
-			frac->cI = (env->fractal == 1) ? (y - (WIN_HI / 2)) / (WIN_HI / 3 * env->scale) : frac->cI;
+			frac->zRnew = (env->fractal == 0) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 4 + env->scale) + env->x_displace : 0;
+			frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / (WIN_HI / 4 + env->scale) + env->y_displace : 0;
+			frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 4 + env->scale) + env->x_displace : frac->cR;
+			frac->cI = (env->fractal == 1) ? (y - (WIN_HI / 2)) / (WIN_HI / 4 + env->scale) + env->y_displace : frac->cI;
 			while (i < env->iterations && (frac->zRnew * frac->zRnew) + (frac->zInew * frac->zInew) < 4)
 			{
 				frac->zRold = frac->zRnew;
 				frac->zIold = frac->zInew;
 				frac->zRnew = (frac->zRold * frac->zRold) - (frac->zIold * frac->zIold) + frac->cR;
 				frac->zInew = (2 * frac->zRold * frac->zIold) + frac->cI;
-				frac->color += 1000;
+				frac->color += env->color_inc;
 				i++;
 			}
-			if (i == 300)
+			if (i == env->iterations)
 				frac->color = 0x000000;
 			mlx_pixel_put(env->mlx, env->window, x++, y, frac->color);
 		}
@@ -56,21 +56,23 @@ void				fractal_gen(t_env *env)
 {
 	t_frac frac;
 
-	env->iterations = 300;
-	if (env->fractal == 0)
-	{
-		if (env->reinit == true)
-		{
-			frac.cR = 0;
-			frac.cI = 0;
-			env->scale = 1;
-		}
-		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ J U L I A ~");
-	}
-	if (env->fractal == 1)
+
+	if (env->reinit == false)
 	{
 		env->scale = 1;
-		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ M A N D E L B R O T ~");
+		env->iterations = 250;
+		env->x_displace = 0;
+		env->y_displace = 0;
+		env->color_inc = 200;
 	}
+	if (env->fractal == 0)
+	{
+		frac.cR = .28;
+		frac.cI = .008;
+		if (env->reinit == false)
+			env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ J U L I A ~");
+	}
+	if (env->fractal == 1 && env->reinit == false)
+		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ M A N D E L B R O T ~");
 	fractal_draw(env, &frac);
 }

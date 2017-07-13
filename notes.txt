@@ -23,14 +23,14 @@ techincal things to figure out
 
 key controls
 ............PHI............
-R == rotation on / off
-I == increase distance for which pattern is continued
-K == decrease distance for which pattern is continued
+// R == rotation on / off (maybe someday)
+I == + iterations of pentagrams within the given space
+K == - iterations of pentagrams within the given space
 G == All lines green
 
 ...........MANDEL..........
-I == increase iterations
-K == decrease iterations
+I == + iterations per pixel
+K == - iterations per pixel
 W == up
 A == left
 S == down
@@ -40,6 +40,10 @@ MOUSE WHEEL == zoom
 ..........JULIA............
 I == increase iterations
 K == decrease iterations
+W == up
+A == left
+S == down
+D == right
 Use the mouse to vary the C constant
 F == fix the current c value / restore movement
 MOUSE WHEEL == zoom

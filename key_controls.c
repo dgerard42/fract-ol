@@ -21,23 +21,30 @@ void				exit_fractol(t_env *env)
 }
 
 
-void			mandel_controls(t_env *env, int keycode)
+void			fractal_controls(t_env *env, int keycode)
 {
-
+	if (keycode == KEY_I)
+		env->iterations += 50;
+	if (keycode == KEY_K)
+		env->iterations -= 50;
+	if (keycode == KEY_W)
+		env->y_displace += 0.02 / env->scale;
+	if (keycode == KEY_A)
+		env->x_displace -= 0.02 / env->scale;
+	if (keycode == KEY_S)
+		env->y_displace -= 0.02 / env->scale;
+	if (keycode == KEY_D)
+		env->x_displace += 0.02 / env->scale;
 }
 
-void			julia_control(t_env *env, int keycode)
-{
-
-}
 void			phi_controls(t_env *env, int keycode)
 {
 	if (keycode == KEY_K)
-		env->pent_interval += 0.003;
-	printf("%f\n", env->pent_interval);
-	printf("%f\n", -(PHI - 1.01));
-	if (keycode == KEY_I && env->pent_interval >= -(PHI - 1.016))
-		env->pent_interval -= 0.003;
+		env->pent_interval += (env->pent_interval > -0.5) ? 0.003 : 0.0003;
+//	printf("%f\n", env->pent_interval);
+//	printf("%f\n", -(PHI - 1.01));
+	if (keycode == KEY_I && env->pent_interval >= -(PHI - 1.0131))
+		env->pent_interval -= (env->pent_interval > -0.5) ? 0.003 : 0.0003;
 	if (keycode == KEY_G)
 		env->color_inc = 0;
 
@@ -54,14 +61,12 @@ int				key_controls(int keycode, t_env *env)
 		exit_fractol(env);
 //	if (keycode == KEY_Z)
 //		env->scale += 1;
-//	if (env->fractal == 0)
-//		julia_controls(env, keycode);
-//	if (env->fractal == 1)
-//		mandel_controls(env, keycode);
+	if (env->fractal == 0 || env->fractal == 1)
+		fractal_controls(env, keycode);
 	if (env->fractal == 2)
 		phi_controls(env, keycode);
 	if (keycode == KEY_C)
-		env->color_inc += 2000;
+		env->color_inc += (env->color_inc > 100000) ? 20000 : 2000;
 	if (keycode == KEY_V)
 		env->color_inc -= 2000;
 	env->reinit = true;

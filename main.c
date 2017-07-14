@@ -27,7 +27,8 @@ void			welcome_user(void)
 
 void			reinit(t_env *env)
 {
-	mlx_clear_window(env->mlx, env->window);
+//	mlx_clear_window(env->mlx, env->window);
+	mlx_destroy_image(env->mlx, env->image);
 	if (env->fractal == 0 || env->fractal == 1)
 		fractal_gen(env);
 	if (env->fractal == 2)
@@ -35,6 +36,7 @@ void			reinit(t_env *env)
 		ft_memdel((void **)&env->pent);
 		phi_gen(env);
 	}
+	mlx_new_image(env->mlx, WIN_HI, WIN_LEN);
 }
 
 void			handle_parameters(t_env *env, int argc, char *parameter)
@@ -68,14 +70,22 @@ int				main(int argc, char **argv)
 
 	handle_parameters(&env, argc, argv[1]);
 	env.mlx = mlx_init();
+	env.image = mlx_new_image(env.mlx, WIN_LEN, WIN_HI);
+	env.pixels = (int *)mlx_get_data_addr(env.image, &env.bits_per_pixel, &env.size_line, &env.endian);
 	env.reinit = false;
 	if (env.fractal == 0 || env.fractal == 1)
 		fractal_gen(&env);
 	if (env.fractal == 2)
 		phi_gen(&env);
+	mlx_put_image_to_window(env.mlx, env.window, env.image, 0, 0);
 	welcome_user();
+	//handles keys being held down
 	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
-	mlx_mouse_hook(env.window, &mouse_controls, &env);
+	//handles mouse CLICK events
+	mlx_mouse_hook(env.window, &mouse_controls, (void *)&env);
+	//handles mouse MOVE events
+	if (env.julia_move == true)
+		mlx_hook(env.window, 6, 0, another_ft, (void *)&env);
 	mlx_loop(env.mlx);
 	return(0);
 }

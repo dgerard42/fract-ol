@@ -16,7 +16,7 @@ void				phi_setup(t_env *env, t_phi *phi, t_drw *drw)
 {
 	if (env->reinit == false)
 	{
-		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ H A I L  S A T A N ~");
+		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "H   A   I   L     S   A   T   A   N");
 		env->pent_interval = 0.22;
 		env->color_inc = 200;
 	}
@@ -114,7 +114,8 @@ void				phi_gen(t_env *env)
 //			drw.color = 0x0000FF;
 			phi.inverse = true;
 		}
-//		mlx_string_put(env->mlx, env->window, 20, WIN_HI - 20, 0xFFFFFF0, ft_itoa((PHI + env->pent_interval) * 100000000));
+	//	ft_itoa(((PHI + env->pent_interval) * 100000000) - 100000000);
+//		mlx_string_put(env->mlx, env->window, 20, WIN_HI - 20, 0xFFFFFF0, "hella";
 //		printf("env->pent[1]=%f\n", env->pent[1]);
 	}
 }

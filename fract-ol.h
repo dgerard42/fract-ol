@@ -23,6 +23,7 @@
 # define WIN_HI				1200
 # define WIN_LEN			1200
 # define PHI				1.618033987
+## define PENT_RATIO		ft_itoa(((PHI + env->pent_interval) * 100000000) - 100000000);
 
 # define KEY_ESC			53
 # define KEY_W				13
@@ -34,17 +35,24 @@
 # define KEY_G              5
 # define KEY_C				8
 # define KEY_V				9
+# define KEY_F				3
 
 typedef	struct	s_env
 {
 	void	*mlx;
 	void	*window;
+	void	*image;
+	int		*pixels;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
 	bool	reinit;
 	int		fractal;
 	int		color_inc;
 	int		iterations;
 	int		mouse_x;
 	int		mouse_y;
+	bool	julia_move;
 	double	scale;
 	double	x_displace;
 	double	y_displace;
@@ -90,6 +98,7 @@ void			fractal_gen(t_env *env);
 void			phi_gen(t_env *env);
 int				key_controls(int keycode, t_env *env);
 int				mouse_controls(int keycode, int x, int y, t_env *env);
+int				another_ft(int x, int y, t_env *env);
 void			draw_line(t_env *env, t_drw *drw);
 void			reinit(t_env *env);
 

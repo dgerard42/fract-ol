@@ -12,12 +12,6 @@
 
 #include "fract-ol.h"
 
-/*
-void				fractal_setup(t_env *env, t_frac *frac)
-{
-
-}
-*/
 void				fractal_draw(t_env *env, t_frac *frac)
 {
 	int i;
@@ -36,10 +30,6 @@ void				fractal_draw(t_env *env, t_frac *frac)
 			frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / (WIN_HI / 4 + env->scale) + env->y_displace : 0;
 			frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 4 + env->scale) + env->x_displace : frac->cR;
 			frac->cI = (env->fractal == 1) ? (y - (WIN_HI / 2)) / (WIN_HI / 4 + env->scale) + env->y_displace : frac->cI;
-		//	frac->zRnew = (env->fractal == 0) ? (x - (WIN_LEN / 2)) / ((WIN_LEN / 4) + env->scale) + env->x_displace : 0;
-		//	frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / ((WIN_HI / 4) + env->scale) + env->y_displace : 0;
-		//	frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / ((WIN_LEN / 4) + env->scale) + env->x_displace : frac->cR;
-		//	frac->cI = (env->fractal == 1) ? (y - (WIN_HI / 2)) / ((WIN_HI / 4) + env->scale) + env->y_displace : frac->cI;
 			while (i < env->iterations && (frac->zRnew * frac->zRnew) + (frac->zInew * frac->zInew) < 4)
 			{
 				frac->zRold = frac->zRnew;
@@ -51,7 +41,10 @@ void				fractal_draw(t_env *env, t_frac *frac)
 			}
 			if (i == env->iterations)
 				frac->color = 0x000000;
-			mlx_pixel_put(env->mlx, env->window, x++, y, frac->color);
+			env->pixels[x + y] = frac->color; 
+	//		mlx_pixel_put(env->mlx, env->window, x++, y, frac->color);
+	//		mlx_string_put(env->mlx, env->window, 20, WIN_HI - 20, 0xFFFFFF0, ft_itoa(frac->cR * 100000));
+	//		mlx_string_put(env->mlx, env->window, 20, WIN_HI - 20, 0xFFFFFF0, "cool");
 		}
 	}
 }
@@ -67,19 +60,22 @@ void				fractal_gen(t_env *env)
 		env->x_displace = 0;
 		env->y_displace = 0;
 		env->color_inc = 200;
+		frac.cR = 0;
+		frac.cI = 0;
+		env->julia_move = true;
 	}
 	if (env->fractal == 0)
 	{
-		frac.cR = ((double)(env->mouse_x) - (WIN_LEN / 2)) / 1000;
-		frac.cI = ((double)(env->mouse_y) - (WIN_HI / 2)) / 1000;
-		printf("%d\n", env->mouse_x);
-		printf("%d\n", env->mouse_y);
-		printf("%f\n", frac.cR);
-		printf("%f\n", frac.cI);
+		frac.cR = ((double)(env->mouse_x) - (WIN_LEN / 2)) / 800;
+		frac.cI = ((double)(env->mouse_y) - (WIN_HI / 2)) / 800;
+//		printf("%d\n", env->mouse_x);
+//		printf("%d\n", env->mouse_y);
+//		printf("%f\n", frac.cR);
+//		printf("%f\n", frac.cI);
 		if (env->reinit == false)
-			env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~  J  U  L  I  A  ~");
+			env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "J   U   L   I   A");
 	}
 	if (env->fractal == 1 && env->reinit == false)
-		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~  M  A  N  D  E  L  B  R  O  T  ~");
+		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "M   A   N   D   E   L   B   R   O   T");
 	fractal_draw(env, &frac);
 }

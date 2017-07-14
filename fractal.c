@@ -6,7 +6,7 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 17:00:40 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/06 17:00:43 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/13 11:00:00 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void				fractal_draw(t_env *env, t_frac *frac)
 			frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / (WIN_HI / 4 + env->scale) + env->y_displace : 0;
 			frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 4 + env->scale) + env->x_displace : frac->cR;
 			frac->cI = (env->fractal == 1) ? (y - (WIN_HI / 2)) / (WIN_HI / 4 + env->scale) + env->y_displace : frac->cI;
+		//	frac->zRnew = (env->fractal == 0) ? (x - (WIN_LEN / 2)) / ((WIN_LEN / 4) + env->scale) + env->x_displace : 0;
+		//	frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / ((WIN_HI / 4) + env->scale) + env->y_displace : 0;
+		//	frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / ((WIN_LEN / 4) + env->scale) + env->x_displace : frac->cR;
+		//	frac->cI = (env->fractal == 1) ? (y - (WIN_HI / 2)) / ((WIN_HI / 4) + env->scale) + env->y_displace : frac->cI;
 			while (i < env->iterations && (frac->zRnew * frac->zRnew) + (frac->zInew * frac->zInew) < 4)
 			{
 				frac->zRold = frac->zRnew;
@@ -56,7 +60,6 @@ void				fractal_gen(t_env *env)
 {
 	t_frac frac;
 
-
 	if (env->reinit == false)
 	{
 		env->scale = 1;
@@ -67,12 +70,16 @@ void				fractal_gen(t_env *env)
 	}
 	if (env->fractal == 0)
 	{
-		frac.cR = .28;
-		frac.cI = .008;
+		frac.cR = ((double)(env->mouse_x) - (WIN_LEN / 2)) / 1000;
+		frac.cI = ((double)(env->mouse_y) - (WIN_HI / 2)) / 1000;
+		printf("%d\n", env->mouse_x);
+		printf("%d\n", env->mouse_y);
+		printf("%f\n", frac.cR);
+		printf("%f\n", frac.cI);
 		if (env->reinit == false)
-			env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ J U L I A ~");
+			env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~  J  U  L  I  A  ~");
 	}
 	if (env->fractal == 1 && env->reinit == false)
-		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ M A N D E L B R O T ~");
+		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~  M  A  N  D  E  L  B  R  O  T  ~");
 	fractal_draw(env, &frac);
 }

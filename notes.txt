@@ -6,7 +6,7 @@
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/08 13:19:54 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/11 20:58:40 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/13 17:09:51 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ techincal things to figure out
 key controls
 ............PHI............
 // R == rotation on / off (maybe someday)
+// 1-0 == saved color schems, my favorites (maybe someday)
 I == + iterations of pentagrams within the given space
 K == - iterations of pentagrams within the given space
 G == All lines green
@@ -56,6 +57,12 @@ V == - color increase per iteration
 optimizations
 .if the point isn't in the screen dont calculate it (for frac zoom)
 
+
+nice color incs for fractals
+
 phi
-nice color incs for fractal
 34398479
+
+julia
+
+mandel

@@ -75,7 +75,7 @@ int				main(int argc, char **argv)
 		phi_gen(&env);
 	welcome_user();
 	mlx_hook(env.window, 2, 0, key_controls, (void *)&env);
-//	mlx_mouse_hook(env.window, &mouse_controls, &env);
+	mlx_mouse_hook(env.window, &mouse_controls, &env);
 	mlx_loop(env.mlx);
 	return(0);
 }

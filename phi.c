@@ -6,7 +6,7 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 18:18:20 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/08 18:56:24 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/13 17:45:09 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				phi_setup(t_env *env, t_phi *phi, t_drw *drw)
 {
 	if (env->reinit == false)
 	{
-		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ H A I L  S A T I N ~");
+		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "~ H A I L  S A T A N ~");
 		env->pent_interval = 0.22;
 		env->color_inc = 200;
 	}

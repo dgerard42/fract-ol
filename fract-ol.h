@@ -41,11 +41,13 @@ typedef	struct	s_env
 	void	*window;
 	bool	reinit;
 	int		fractal;
-	double	scale;
 	int		color_inc;
+	int		iterations;
+	int		mouse_x;
+	int		mouse_y;
+	double	scale;
 	double	x_displace;
 	double	y_displace;
-	int		iterations;
 	float	*pent;
 	float	pent_interval;
 }				t_env;
@@ -87,7 +89,7 @@ typedef	struct	s_drw
 void			fractal_gen(t_env *env);
 void			phi_gen(t_env *env);
 int				key_controls(int keycode, t_env *env);
-//int				mouse_controls(int keycode, t_env *env);
+int				mouse_controls(int keycode, int x, int y, t_env *env);
 void			draw_line(t_env *env, t_drw *drw);
 void			reinit(t_env *env);
 

@@ -20,10 +20,10 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-# define WIN_HI				1200
-# define WIN_LEN			1200
+# define WIN_HI				900
+# define WIN_LEN			900
 # define PHI				1.618033987
-## define PENT_RATIO		ft_itoa(((PHI + env->pent_interval) * 100000000) - 100000000);
+//# define PENT_RATIO		ft_itoa(((PHI + env->pent_interval) * 100000000) - 100000000);
 
 # define KEY_ESC			53
 # define KEY_W				13
@@ -50,12 +50,12 @@ typedef	struct	s_env
 	int		fractal;
 	int		color_inc;
 	int		iterations;
-	int		mouse_x;
-	int		mouse_y;
-	bool	julia_move;
 	double	scale;
 	double	x_displace;
 	double	y_displace;
+	int		mouse_x;
+	int		mouse_y;
+	bool	julia_move;
 	float	*pent;
 	float	pent_interval;
 }				t_env;

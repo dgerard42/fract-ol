@@ -16,8 +16,12 @@ void				no_run(t_env *env, t_drw *drw)
 {
 	if (drw->y1 < drw->y0)
 		ft_bitswap((unsigned char *)&(drw->y0), (unsigned char *)&(drw->y1), 4);
-	while (drw->y0 < drw->y1)
+	while (drw->y0 < drw->y1 && drw->x0 >= 0 && drw->x0 <= WIN_LEN && drw->y0 >= 0 && drw->y0 <= WIN_HI)
+	{
+	//	env->pixels[drw->x0 + (drw->y0 * WIN_LEN)] = drw->color;
 		mlx_pixel_put(env->mlx, env->window, drw->x0, drw->y0++, 0x00FF00);
+	//	drw->y0++;
+	}
 }
 
 void				engine(t_env *env, t_drw *drw, int riru, int *drop)
@@ -33,12 +37,30 @@ void				engine(t_env *env, t_drw *drw, int riru, int *drop)
 	a0 = (riru == 0) ? (drw->x0) : (drw->y0);
 	a1 = (riru == 0) ? (drw->x1) : (drw->y1);
 	b0 = (riru == 0) ? (drw->y0) : (drw->x0);
-	while (a0 != a1)
+	while (a0 != a1)//&& a0 >=0 && b0 >= 0 &&)
 	{
-		if (riru == 0)
+//		if (riru == 1)
+//			if (a0 <= 0 || a0 >= WIN_HI)
+//				break;
+//		if (riru == 0)
+//			if (b0 <= 0 || b0 >= WIN_LEN)
+//				break;
+		if (riru == 0)// && a0 >= 0 && a0 <= WIN_LEN && b0 >= 0 && b0 <= WIN_HI)
+		{
+		//	printf("%d\n", a0);
+		//	printf("%d\n", b0);
+		//	printf("%d\n", (a0 + (b0 * WIN_LEN)));
+//			env->pixels[a0 + (b0 * WIN_LEN)] = drw->color;
+//			a0++;
 			mlx_pixel_put(env->mlx, env->window, a0++, b0, drw->color);
-		if (riru == 1)
+		}
+		if (riru == 1)// && b0 >= 0 && b0 <= WIN_LEN && a0 >= 0 && a0 <= WIN_HI)
+		{
+//			env->pixels[b0 + (a0 * WIN_LEN)] = drw->color;
+//			a0++;
 			mlx_pixel_put(env->mlx, env->window, b0, a0++, drw->color);
+		}
+//		printf("here\n");
 		bucket += drop[riru];
 		if (bucket >= drw->level)
 		{

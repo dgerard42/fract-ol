@@ -25,7 +25,7 @@ void				fractal_draw(t_env *env, t_frac *frac)
 		while (x < WIN_LEN)
 		{
 			i = 0;
-			frac->color = 0xFFFFFFF;
+			frac->color = 0x0FFFFFF;
 			frac->zRnew = (env->fractal == 0) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 4 + env->scale) + env->x_displace : 0;
 			frac->zInew = (env->fractal == 0) ? (y - (WIN_HI / 2)) / (WIN_HI / 4 + env->scale) + env->y_displace : 0;
 			frac->cR = (env->fractal == 1) ? (x - (WIN_LEN / 2)) / (WIN_LEN / 4 + env->scale) + env->x_displace : frac->cR;

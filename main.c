@@ -15,35 +15,50 @@
 void			welcome_user(void)
 {
 	ft_putstr("welcome user (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n");
-	ft_putstr("--------------command list-----------------\n");
-	ft_putstr("ESC == exit program\nC == shift color palette\n");
-	ft_putstr("---------------------------\nJulia set\n");
-	ft_putstr("Use the mouse to manipulate the C value in the Julia set\n");
-	ft_putstr("---------------------------\nMadelbrot fractal\n");
-	ft_putstr("W == move up\nA == move left\n");
-	ft_putstr("S == move right\nD == move down\nZ == zoom in\nX == zoom out\n");
-	ft_putstr("---------------------------\nΦ pentagram fractal\n");
+	ft_putstr("--------------universal commands-----------------\n");
+	ft_putstr("ESC == exit program\nC == + color increase per iteration\n");
+	ft_putstr("V == - color increase per iteration\n");
+	ft_putstr("I == + iterations\nK == - iterations\n");
+	ft_putstr("---------------------------\n~ J U L I A  S E T ~\n");
+	ft_putstr("use the mouse to manipulate the c value in the julia set\n");
+	ft_putstr("F == fix the current c value / restore movement\n");
+	ft_putstr("W == up\nA == left\nS == down\nD == right\n");
+	ft_putstr("MOUSE WHEEL == zoom\n");
+	ft_putstr("---------------------------\n~ M A N D E L B R O T ~\n");
+	ft_putstr("W == up\nA == left\nS == down\nD == right\n");
+	ft_putstr("MOUSE WHEEL == zoom\n");
+	ft_putstr("---------------------------\n~ Φ PENTAGRAM FRACTAL ~\n");
+	ft_putstr("I == + volume of pentagrams\nK == - volume of pentagrams\n");
+	ft_putstr("G == green lines on / off\n");
 }
 
 void			reinit(t_env *env)
 {
-//	mlx_clear_window(env->mlx, env->window);
 	if (env->reinit == true)
 	{
 	//	printf("here\n");
-		mlx_destroy_image(env->mlx, env->image);
-	//	ft_memdel((void **)&env->pixels);
+		if (env->fractal == 0 || env->fractal == 1)
+		{
+			mlx_destroy_image(env->mlx, env->image);
+	//		printf("bzero here\n");
+	//		ft_bzero((void *)env->pixels, (size_t)(WIN_HI * WIN_LEN));
+	//		ft_memset((void *)env->pixels, 0, (size_t)(WIN_HI * WIN_LEN));
+		}
 		if (env->fractal == 2)
+		{
+			mlx_clear_window(env->mlx, env->window);
 			ft_memdel((void **)&env->pent);
+		}
 	}
-	env->image = mlx_new_image(env->mlx, WIN_HI, WIN_LEN);
-	env->pixels = (int *)mlx_get_data_addr(env->image, &env->bits_per_pixel, &env->size_line, &env->endian);
 	if (env->fractal == 0 || env->fractal == 1)
+	{
+		env->image = mlx_new_image(env->mlx, WIN_HI, WIN_LEN);
+		env->pixels = (int *)mlx_get_data_addr(env->image, &env->bits_per_pixel, &env->size_line, &env->endian);
 		fractal_gen(env);
+		mlx_put_image_to_window(env->mlx, env->window, env->image, 0, 0);
+	}
 	if (env->fractal == 2)
 		phi_gen(env);
-//	printf("here1\n");
-	mlx_put_image_to_window(env->mlx, env->window, env->image, 0, 0);
 }
 
 void			handle_parameters(t_env *env, int argc, char *parameter)

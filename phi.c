@@ -60,6 +60,8 @@ void				draw_pent(t_env *env, t_phi *phi, t_drw *drw)
 		drw->y0 = (int)env->pent[i + 1] + (WIN_HI / 2);
 		drw->x1 = (int)env->pent[i + 2] + (WIN_LEN / 2);
 		drw->y1 = (int)env->pent[i + 3] + (WIN_HI / 2);
+	//	printf("x0=%d, y0=%d, x1=%d, y1=%d\n", drw->x0, drw->y0, drw->x1, drw->y1);
+	//	printf("%d\n", i);
 		draw_line(env, drw);
 		i += 2;
 	}

@@ -14,7 +14,8 @@
 
 void				exit_fractol(t_env *env)
 {
-	mlx_destroy_image(env->mlx, env->image);
+	if (env->fractal == 0 || env->fractal == 1)
+		mlx_destroy_image(env->mlx, env->image);
 	mlx_destroy_window(env->mlx, env->window);
 	if (env->fractal == 2)
 		ft_memdel((void **)&env->pent);
@@ -27,15 +28,15 @@ void			fractal_controls(t_env *env, int keycode)
 		env->iterations += 10;
 	if (keycode == KEY_K)
 		env->iterations -= 10;
-//	printf("%f\n", );
+//	printf("%d\n", env->iterations);
 	if (keycode == KEY_W)
 		env->y_displace -= (0.05 / (env->scale / 1000));
 	if (keycode == KEY_A)
-		env->x_displace += (0.05 / (env->scale / 1000));
+		env->x_displace -= (0.05 / (env->scale / 1000));
 	if (keycode == KEY_S)
 		env->y_displace += (0.05 / (env->scale / 1000));
 	if (keycode == KEY_D)
-		env->x_displace -= (0.05 / (env->scale / 1000));
+		env->x_displace += (0.05 / (env->scale / 1000));
 	if (keycode == KEY_F)
 		env->julia_move = (env->julia_move == true) ? false : true;
 }
@@ -66,7 +67,7 @@ int				mouse_controls(int keycode, int x, int y, t_env *env)
 	if (keycode == 4)
 		env->scale += (env->scale + 10);
 	if (keycode == 5)
-		env->scale -= (env->scale - 10);
+		env->scale -= (env->scale);
 	if (keycode == 4 || keycode == 5)
 	{
 		env->reinit = true;
@@ -94,7 +95,7 @@ int				key_controls(int keycode, t_env *env)
 	}
 	if (keycode == KEY_C)
 		env->color_inc += (env->color_inc > 100000) ? 20000 : 2000;
-	printf("%d\n", env->color_inc);
+//	printf("%d\n", env->color_inc);
 	if (keycode == KEY_V)
 		env->color_inc -= (env->color_inc > 100000) ? 20000 : 2000;
 	env->reinit = true;

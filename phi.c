@@ -6,7 +6,7 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 18:18:20 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/13 17:45:09 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/17 16:24:03 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				phi_setup(t_env *env, t_phi *phi, t_drw *drw)
 {
 	if (env->reinit == false)
 	{
-		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "H   A   I   L     S   A   T   A   N");
+		env->window = mlx_new_window(env->mlx, WIN_LEN, WIN_HI, "P   H   I");
 		env->pent_interval = 0.22;
 		env->color_inc = 200;
 	}
@@ -48,23 +48,11 @@ void				new_pent(t_env *env, t_phi *phi)
 	env->pent[11] = env->pent[1];
 }
 
-void				draw_pent(t_env *env, t_phi *phi, t_drw *drw)
+void				draw_pentagram(t_env *env, t_phi *phi, t_drw *drw)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
-	i = 0;
-	while (i < 10)
-	{
-		drw->x0 = (int)env->pent[i] + (WIN_LEN / 2);
-		drw->y0 = (int)env->pent[i + 1] + (WIN_HI / 2);
-		drw->x1 = (int)env->pent[i + 2] + (WIN_LEN / 2);
-		drw->y1 = (int)env->pent[i + 3] + (WIN_HI / 2);
-	//	printf("x0=%d, y0=%d, x1=%d, y1=%d\n", drw->x0, drw->y0, drw->x1, drw->y1);
-	//	printf("%d\n", i);
-		draw_line(env, drw);
-		i += 2;
-	}
 	i = 0;
 	while (i < 6)
 	{
@@ -75,13 +63,28 @@ void				draw_pent(t_env *env, t_phi *phi, t_drw *drw)
 			drw->y0 = (int)env->pent[i + 1] + (WIN_HI / 2);
 			drw->x1 = (int)env->pent[j] + (WIN_LEN / 2);
 			drw->y1 = (int)env->pent[j + 1] + (WIN_HI / 2);
-//			printf("i = %d, j = %d\n", i, j);
-//			printf("x0=%d, y0=%d, x1=%d, y1=%d\n", drw->x0, drw->y0, drw->x1, drw->y1);
 			draw_line(env, drw);
 			j += 2;
 		}
 		i += 2;
 	}
+}
+
+void				draw_pentagon(t_env *env, t_phi *phi, t_drw *drw)
+{
+	int		i;
+
+	i = 0;
+	while (i < 10)
+	{
+		drw->x0 = (int)env->pent[i] + (WIN_LEN / 2);
+		drw->y0 = (int)env->pent[i + 1] + (WIN_HI / 2);
+		drw->x1 = (int)env->pent[i + 2] + (WIN_LEN / 2);
+		drw->y1 = (int)env->pent[i + 3] + (WIN_HI / 2);
+		draw_line(env, drw);
+		i += 2;
+	}
+	draw_pentagram(env, phi, drw);
 }
 
 void				phi_gen(t_env *env)
@@ -97,27 +100,18 @@ void				phi_gen(t_env *env)
 	while (env->pent[1] < (WIN_HI + 200))
 	{
 		new_pent(env, &phi);
-		draw_pent(env, &phi, &drw);
+		draw_pentagon(env, &phi, &drw);
 		i++;
 		drw.color += env->color_inc;
 		delta_x = fabsf(env->pent[6] - env->pent[4]);
-	//	printf("delta_x=%f\n", delta_x);
-		increase = sqrt(pow((PHI + env->pent_interval) * delta_x, 2) - pow((delta_x + env->pent_interval/ 2), 2));
-	//	printf("env->pent_interval%f\n", env->pent_interval);
-	//	printf("increase=%f\n", increase);
-	//	printf("pent[1]%f\n", env->pent[1]);
-	//	printf("pent[5]%f\n", env->pent[5]);
+		increase = sqrt(pow((PHI + env->pent_interval) * delta_x, 2)
+			- pow((delta_x + env->pent_interval / 2), 2));
 		env->pent[1] = fabsf(env->pent[5]) + increase;
-//		drw.color = 0x00FF00;
 		phi.inverse = false;
 		if (i % 2 == 0)
 		{
 			env->pent[1] = -env->pent[1];
-//			drw.color = 0x0000FF;
 			phi.inverse = true;
 		}
-	//	ft_itoa(((PHI + env->pent_interval) * 100000000) - 100000000);
-//		mlx_string_put(env->mlx, env->window, 20, WIN_HI - 20, 0xFFFFFF0, "hella";
-//		printf("env->pent[1]=%f\n", env->pent[1]);
 	}
 }

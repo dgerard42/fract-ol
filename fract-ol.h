@@ -6,7 +6,7 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 15:23:46 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/06 15:23:49 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/17 16:20:46 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-# define WIN_HI				900
-# define WIN_LEN			900
+# define WIN_HI				1000
+# define WIN_LEN			1000
 # define PHI				1.618033987
-//# define PENT_RATIO		ft_itoa(((PHI + env->pent_interval) * 100000000) - 100000000);
+# define JULIA				"J   U   L   I   A"
+# define MANDEL				"M   A   N   D   E   L   B   R   O   T"
 
 # define KEY_ESC			53
 # define KEY_W				13

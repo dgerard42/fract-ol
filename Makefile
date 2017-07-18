@@ -6,11 +6,11 @@
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 19:15:03 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/11 19:08:50 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/17 20:10:39 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fract-ol
+NAME = fractol
 
 FLAGS = -Wall -Werror -Wextra
 

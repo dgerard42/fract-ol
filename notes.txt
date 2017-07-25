@@ -6,7 +6,7 @@
 #    By: dgerard <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/08 13:19:54 by dgerard           #+#    #+#              #
-#    Updated: 2017/07/13 17:09:51 by dgerard          ###   ########.fr        #
+#    Updated: 2017/07/24 17:07:51 by dgerard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,13 @@ nice color incs for fractals
 phi
 34398479
 
-julia
-
-mandel
+problems to fix for 2nd turn in:
+*-the displacement arrows going too far if you haven't zoomed
+*-zooming out past the start orientation
+*-norm .h file
+*-norm libft
+*-fix all dem compiler errors for minilibx
+*-fix the green switch functionality
+optional
+no-make .o file directory
+no-putting equasion values on the screen

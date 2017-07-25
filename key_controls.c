@@ -6,11 +6,11 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 16:49:09 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/17 16:21:51 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/24 17:00:30 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract-ol.h"
+#include "fractol.h"
 
 void				exit_fractol(t_env *env)
 {
@@ -29,13 +29,13 @@ void				fractal_controls(t_env *env, int keycode)
 	if (keycode == KEY_K)
 		env->iterations -= 10;
 	if (keycode == KEY_W)
-		env->y_displace -= (0.05 / (env->scale / 1000));
+		env->y_displace -= (env->scale < 15) ? 1 : (0.05 / (env->scale / 1000));
 	if (keycode == KEY_A)
-		env->x_displace -= (0.05 / (env->scale / 1000));
+		env->x_displace -= (env->scale < 15) ? 1 : (0.05 / (env->scale / 1000));
 	if (keycode == KEY_S)
-		env->y_displace += (0.05 / (env->scale / 1000));
+		env->y_displace += (env->scale < 15) ? 1 : (0.05 / (env->scale / 1000));
 	if (keycode == KEY_D)
-		env->x_displace += (0.05 / (env->scale / 1000));
+		env->x_displace += (env->scale < 15) ? 1 : (0.05 / (env->scale / 1000));
 	if (keycode == KEY_F)
 		env->julia_move = (env->julia_move == true) ? false : true;
 }

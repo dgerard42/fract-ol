@@ -6,11 +6,11 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 12:21:31 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/17 16:18:49 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/24 17:00:01 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract-ol.h"
+#include "fractol.h"
 
 void				no_run(t_env *env, t_drw *drw)
 {

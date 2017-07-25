@@ -6,11 +6,11 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 18:18:20 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/17 16:24:03 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/24 17:01:38 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract-ol.h"
+#include "fractol.h"
 
 void				phi_setup(t_env *env, t_phi *phi, t_drw *drw)
 {

@@ -6,11 +6,11 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 13:22:13 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/17 16:22:33 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/07/24 17:05:59 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract-ol.h"
+#include "fractol.h"
 
 void			welcome_user(void)
 {
@@ -29,7 +29,7 @@ void			welcome_user(void)
 	ft_putstr("MOUSE WHEEL == zoom\n");
 	ft_putstr("---------------------------\n~ Φ PENTAGRAM FRACTAL ~\n");
 	ft_putstr("I == + volume of pentagrams\nK == - volume of pentagrams\n");
-	ft_putstr("G == green lines on / off\n");
+	ft_putstr("G == turn on green only lines\n");
 }
 
 void			reinit(t_env *env)

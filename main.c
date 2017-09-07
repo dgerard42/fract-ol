@@ -6,7 +6,7 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 13:22:13 by dgerard           #+#    #+#             */
-/*   Updated: 2017/07/24 17:05:59 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/08/28 12:26:36 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void			handle_parameters(t_env *env, int argc, char **parameters)
 int				main(int argc, char **argv)
 {
 	t_env env;
-	t_env phi;
 
 	handle_parameters(&env, argc, argv);
 	env.mlx = mlx_init();
